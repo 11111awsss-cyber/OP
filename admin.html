@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>الإدارة</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="container">
+
+<div id="login">
+<h2>تسجيل الدخول</h2>
+<input id="user" placeholder="Username">
+<input id="pass" type="password" placeholder="Password">
+<button onclick="login()">دخول</button>
+</div>
+
+<div id="panel" style="display:none;">
+<h1>📊 الردود</h1>
+<div id="data"></div>
+</div>
+
+</div>
+
+<script>
+function login(){
+if(user.value==="admin" && pass.value==="admin"){
+login.style.display="none";
+panel.style.display="block";
+load();
+}else{
+alert("خطأ");
+}
+}
+
+function load(){
+let forms = JSON.parse(localStorage.getItem("forms")||"[]");
+data.innerHTML="";
+forms.reverse().forEach(d=>{
+let div=document.createElement("div");
+div.className="card";
+div.innerHTML=`
+<p><b>${d.school}</b></p>
+<p>${d.q1}</p>
+<p>${d.q2}</p>
+<p>${d.q3}</p>
+<p>${d.suggestions}</p>
+<p>${d.time}</p>`;
+data.appendChild(div);
+});
+}
+</script>
+
+</body>
+</html>
